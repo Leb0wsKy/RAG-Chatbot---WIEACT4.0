@@ -1,6 +1,7 @@
 import requests
-from embedder import cos_sim
-from scraper import scrape_first_conversations
+from src.embedder import cos_sim
+from src.scraper import scrape_first_conversations
+from src.chunks import chunk_text
 
 def generate_answer(query, relevant_answers):
     # Build the context string from relevant answers
@@ -41,10 +42,3 @@ def generate_answer(query, relevant_answers):
         return response.json()['response'].strip()
     else:
         raise Exception(f"Error calling Ollama API: {response.status_code} - {response.text}") 
-
-query = "Why are tomatoes yellow ?"
-res = scrape_first_conversations(query)
-emb_res = cos_sim(query,res)
-print(emb_res)
-answer = generate_answer(query, [emb_res_item[0] for emb_res_item in emb_res])
-print(answer)

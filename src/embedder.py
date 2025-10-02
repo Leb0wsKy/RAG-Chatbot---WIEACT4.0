@@ -1,7 +1,5 @@
 # src/embedder.py
 from sentence_transformers import SentenceTransformer
-import numpy as np
-from typing import List
 from sklearn.metrics.pairwise import cosine_similarity
 
 
@@ -22,10 +20,3 @@ def cos_sim(query,texts) :
     res = [res_item for res_item in res if res_item[1] > 0.2]
     return res
 
-    
-
-query = "What is the impact of climate change on agriculture?"
-texts = ["Climate change affects agriculture by altering rainfall patterns and increasing the frequency of extreme weather events.","Oussema is stupid"]
-res = cos_sim(query,texts)
-for result in res:
-    print(result[0],result[1])
